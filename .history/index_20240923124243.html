@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Vite + TS</title>
+    <div id="map" style="width: 100%; height: 700px;"></div>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/leaflet.js"></script>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.ts"></script>
+    <h1>Restaurants</h1>
+    <h2>Filter restaurants</h2>
+    <div id="napit">
+      <button id="sodexo">Sodexo</button>
+      <button id="compass">Compass Group</button>
+      <button id="reset">Show all</button>
+    </div>
+    <table>
+      <tr>
+        <th>Name</th>
+        <th>Address</th>
+      </tr>
+      <!-- add restaurants here -->
+    </table>
+    <!-- modal -->
+    <dialog>
+      <!-- add restaurant info here when restaurant is clicked -->
+    </dialog>
+    <div id="map-container"></div>
+  </body>
+</html>

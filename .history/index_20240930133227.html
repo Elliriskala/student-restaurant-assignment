@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Restaurants</title>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/main.ts"></script>
+    <script
+      src="https://kit.fontawesome.com/ce58f4085c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="src/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="nav">
+        <div id="buttons">
+          <button id="reset">Show all</button>
+          <button id="sodexo">Sodexo</button>
+          <button id="compass">Compass Group</button>
+        </div>
+        <h2>Student Restaurants</h2>
+        <div class="login">
+          <i class="fa-solid fa-right-to-bracket" id="login"></i>
+        </div>
+      </header>
+      <main>
+      <dialog>
+        <form method="dialog">
+          <fieldset>
+            <legend>Register with your information</legend>
+            <img src="../img/lock.png" alt="loginimage" id="login-image" />
+            <div class="registration">
+                <label>Username:</label>
+                <input
+                type="text"
+                name="Username:"
+                placeholder="Username"
+                minlength="3"
+                maxlength="15"
+                title="Atleast 3 charachters needed"
+                required
+                />
+                <label>Email address:</label>
+                <input
+                type="email"
+                name="Email"
+                id=""
+                placeholder="@metropolia.fi"
+                required
+                />
+                <label>Password:</label>
+                <input
+                  type="password"
+                  name="Password"
+                  id="password"
+                  placeholder="Password"
+                  pattern="^(?=.*[A-Z])(?=.*\d.*\d).{8,}$"
+                  required
+                  />
+                </div>
+                <div class="button-container">
+                  <button class="button">Submit</button>
+                  <button class="button" id="close">Close</button>
+                </div>
+              </fieldset>
+            </form>
+          </dialog>
+        <div id="map-container"></div>
+      </main>
+      <footer>
+        <p>© Elli 2024</p>
+      </footer>
+    </div>
+    <dialog id="today-menu">
+      <!-- add restaurant dailymenu here when today's menu button is clicked -->
+    </dialog>
+    <dialog id="week-menu">
+      <!-- add restaurant weeklymenu here when week's menu button is clicked -->
+    </dialog>
+    <script>
+      const dialog = document.querySelector('dialog');
+      const showButton = document.querySelector('i');
+      const closeButton = document.querySelector('#close');
+
+      // "Show the dialog" button opens the dialog modally
+      showButton.addEventListener('click', () => {
+        dialog.showModal();
+      });
+
+      // "Close" button closes the dialog
+      closeButton.addEventListener('click', () => {
+        dialog.close();
+      });
+    </script>
+  </body>
+</html>

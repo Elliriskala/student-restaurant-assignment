@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Restaurants</title>
+    <link
+      href="https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css"
+      rel="stylesheet"
+    />
+    <script type="module" src="/src/main.ts"></script>
+    <script
+      src="https://kit.fontawesome.com/ce58f4085c.js"
+      crossorigin="anonymous"
+    ></script>
+    <link href="src/style.css" rel="stylesheet" />
+  </head>
+  <body>
+    <div class="container">
+      <header class="nav">
+        <nav class="company-nav">
+          <h2 class="company">Student Restaurants</h2>
+        </nav>
+        <div class="login-button">
+          <button id="login">
+            <i class="fa-solid fa-right-to-bracket"></i>
+          </button>
+        </div>
+      </header>
+      <main>
+        <dialog class="login-dialog">
+          <form method="dialog">
+            <fieldset>
+              <legend>Register with your information</legend>
+              <div class="registration">
+                <label>Username:</label>
+                <input
+                  type="text"
+                  name="Username:"
+                  placeholder="Username"
+                  minlength="3"
+                  maxlength="15"
+                  title="Atleast 3 charachters needed"
+                  required
+                />
+                <label>Email address:</label>
+                <input
+                  type="email"
+                  name="Email"
+                  id=""
+                  placeholder="@metropolia.fi"
+                  required
+                />
+                <label>Password:</label>
+                <input
+                  type="password"
+                  name="Password"
+                  id="password"
+                  placeholder="Password"
+                  pattern="^(?=.*[A-Z])(?=.*\d.*\d).{8,}$"
+                  required
+                />
+              </div>
+              <h4>Already have an account? Log in here:</h4>
+              <div class="login">
+                <label>Username:</label>
+                <input
+                  type="text"
+                  name="Username:"
+                  placeholder="Username"
+                  minlength="3"
+                  maxlength="15"
+                  title="Atleast 3 charachters needed"
+                  required
+                />
+                <label>Password:</label>
+                <input
+                  type="password"
+                  name="Password"
+                  id="password"
+                  placeholder="Password"
+                  pattern="^(?=.*[A-Z])(?=.*\d.*\d).{8,}$"
+                  required
+                />
+              </div>
+              <div class="button-container">
+                <button class="button">Submit</button>
+                <button class="button" id="close">Close</button>
+              </div>
+            </fieldset>
+          </form>
+        </dialog>
+        <div id="map-container"></div>
+        <div id="buttons">
+          <button id="reset">Show all</button>
+          <button id="sodexo">Sodexo</button>
+          <button id="compass">Compass Group</button>
+        </div>
+      </main>
+      <footer>
+        <p>Copyright, Elli 2024</p>
+      </footer>
+    </div>
+    <dialog class="menu-dialog" id="today-menu">
+      <!-- add restaurant dailymenu here when today's menu button is clicked -->
+    </dialog>
+    <dialog class="menu-dialog" id="week-menu">
+      <!-- add restaurant weeklymenu here when week's menu button is clicked -->
+    </dialog>
+  </body>
+</html>

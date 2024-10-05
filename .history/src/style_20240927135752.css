@@ -1,0 +1,248 @@
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  --white: rgb(249, 245, 245);
+  --bisque-color: rgb(224, 201, 167);
+  --cotton-candy: rgb(232, 220, 214);
+  --dust-pink: rgb(133, 129, 129);
+  --grey: #222025;
+  --soy-sauce: #1e181c;
+  --brown-grey: rgba(44, 33, 33, 0.911);
+  --raspberry-pink: rgb(200, 127, 127);
+  --intense-red: rgb(191, 77, 77);
+  --wine-red: rgb(24, 6, 2);
+  --forest-green: rgba(1, 12, 1, 0.815);
+  --grey-green: rgba(54, 71, 63, 0.908);
+  --khaki-green: rgb(93, 112, 80);
+  --lime-green: rgb(108, 134, 91);
+}
+
+.container {
+  margin: 0;
+  padding: 0;
+  width: 100dvw;
+  height: 100dvh;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: var(--grey);
+}
+
+.company {
+  margin: 0;
+  margin-left: 2em;
+  font-size: 1.5em;
+}
+
+.nav-list,
+.company {
+  display: flex;
+  padding: 0;
+}
+
+.nav-list li,
+.company li {
+  margin: 0.2em;
+  list-style-type: none;
+}
+
+.nav-list li a,
+.company li a {
+  display: inline-block;
+  padding: 0.8em;
+  text-decoration: none;
+  color: var(--cotton-candy);
+}
+
+.nav-list li a:hover {
+  color: var(--khaki-green);
+  transition: all 1s;
+}
+
+#login {
+  color: var(--cotton-candy);
+  font-size: 1.5em;
+  border: none;
+  transition: all;
+  margin-right: 2em;
+}
+
+#login:hover {
+  color: var(--khaki-green);
+  transition: all 1s;
+}
+
+main {
+  display: block;
+}
+
+#map-container {
+  height: 85vh;
+  width: 100%;
+}
+
+#map-container > div.mapboxgl-canvas-container.mapboxgl-interactive.mapboxgl-touch-drag-pan.mapboxgl-touch-zoom-rotate > canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.popup {
+  color: var(--soy-sauce);
+  font-size: 1em;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;  
+}
+
+.popup h2 {
+  margin: 1em;
+}
+
+.popup p {
+  margin: 1em;
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.popup ul {
+  width: 90%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  padding: 0;
+  list-style-type: none;
+}
+
+.popup-button {
+  text-align: center;
+  width: 100%;
+  display: inline-block;
+  background-color: var(--dust-pink);
+  color: var(--soy-sauce);
+  text-decoration: none;
+  margin: 0.5em;
+  padding: 0.5em;
+  border-radius: 1em;
+}
+
+.popup-button:hover {
+  background-color: var(--khaki-green);
+  color: var(--cotton-candy);
+  transition: 1s;
+}
+
+#map-container
+  > div.mapboxgl-popup.mapboxgl-popup-anchor-bottom
+  > div.mapboxgl-popup-content,
+#map-container
+  > div.mapboxgl-popup.mapboxgl-popup-anchor-top
+  > div.mapboxgl-popup-content {
+  border-radius: 8px;
+  padding: 1em;
+}
+
+#map-container
+  > div.mapboxgl-popup.mapboxgl-popup-anchor-top
+  > div.mapboxgl-popup-content
+  > button,
+#map-container
+  > div.mapboxgl-popup.mapboxgl-popup-anchor-bottom
+  > div.mapboxgl-popup-content
+  > button {
+  color: var(--soy-sauce);
+  font-size: 1.2em;
+  border: none;
+  position: absolute;
+  padding: 0.2em;
+  top: 0.5em;
+  right: 0.5em;
+}
+
+#today-menu {
+  background-color: var(--grey);
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+  margin: 0;
+  padding: 0;
+}
+
+table h2 {
+  text-align: center;
+}
+
+th {
+  border-bottom: 1px solid var(--cotton-candy);
+
+  padding: 0.5em 1em;
+  text-align: left;
+}
+
+td {
+  border-bottom: 1px solid #ccc;
+  padding: 0.5em 1em;
+}
+
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+footer {
+  bottom: 0;
+  width: 100%;
+  background-color: var(--soy-sauce);
+  text-align: center;
+  color: var(--cotton-candy);
+  padding: 0.2em;
+  font-size: 0.8em;
+  margin: 0;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
