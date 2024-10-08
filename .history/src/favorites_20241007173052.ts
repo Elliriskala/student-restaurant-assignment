@@ -1,0 +1,94 @@
+import { checkLogin } from "./main";
+import { fetchData } from "./functions";
+import { apiUrl } from "./variables";
+import { Restaurant } from "./types/Restaurant";
+
+const favoriteRestaurants = document.querySelector(
+  ".favorite-restaurants"
+) as HTMLTableElement | null;
+
+const thead = document.createElement("thead");
+thead.innerHTML = `
+    <tr>
+      <th id="favorite-restaurants">Favorite restaurants:</th>
+    </tr>
+  `;
+favoriteRestaurants?.appendChild(thead);
+
+const addFavoriteRestaurant = async (token: string, restaurantId: string): Promise<void> => {
+    if (!checkLogin()) {
+        alert("You need to be logged in to remove favorites");
+        return;
+      }
+    
+    const response = await fetch('/api/v1/users', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({ favouriteRestaurant: restaurantId })
+    });
+    
+    if (response.ok) {
+      const data = await response.json();
+      console.log('Favorite restaurant added:', data);
+    } else {
+      const errorData = await response.json();
+      console.error('Error adding favorite restaurant:', errorData);
+    }
+  }
+
+const removeFavorite = async (restaurantName: string): Promise<void> => {
+  if (!checkLogin()) {
+    alert("You need to be logged in to remove favorites");
+    return;
+  }
+
+  const options: RequestInit = {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${localStorage.getItem("token")}`,
+    },
+
+    body: JSON.stringify({ name: restaurantName }),
+  };
+
+  await fetchData(apiUrl + '/users/favouriteRestaurant', options);
+};
+
+const showFavorites = (): void => {
+
+    const favoriteTable = document.querySelector(".favorite-restaurants") as HTMLTableElement;
+
+    if (!favoriteTable) {
+        return;
+    }
+
+    favoriteTable.innerHTML = "";
+
+    const favorites = JSON.parse(localStorage.getItem("favorites") || "[]") as Restaurant[];
+
+    if (favorites.length === 0) {
+        const tableRow = document.createElement("tr");
+        tableRow.innerHTML = `
+            <td>No favorite restaurants</td>
+            `;
+
+        favoriteTable.appendChild(tableRow);
+    } else {
+
+        favorites.forEach((restaurant) => {
+            const tableRow = document.createElement("tr");
+            tableRow.innerHTML = `
+                <td>${restaurant.name} - ${restaurant.address}</td>
+            `;
+        
+
+            favoriteTable.appendChild(tableRow);
+        });
+    }
+};
+
+export { addFavoriteRestaurant, removeFavorite, showFavorites };
