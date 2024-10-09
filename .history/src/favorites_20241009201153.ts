@@ -64,6 +64,7 @@ const addFavouriteToDom = async (token: string) => {
 
   try {
     const favouriteRestaurantId = await fetchFavouriteRestaurantId(token);
+    console.log("Your favourite restaurant ID:", favouriteRestaurantId);
 
     if (!favouriteRestaurantId) {
       favouriteRestaurant.textContent = "No favourite restaurant selected.";
@@ -81,6 +82,13 @@ const addFavouriteToDom = async (token: string) => {
     favouriteRestaurant.textContent = `${name} - ${address}`;
     console.log("Favourite restaurant:", name, address);
 
+    const removeButton = document.createElement("button");
+    removeButton.textContent = "Remove";
+    removeButton.addEventListener("click", async () => {
+      await removeFavourite(token, favouriteRestaurantId);
+    });
+
+    favouriteRestaurant.appendChild(removeButton);
   } catch (error) {
     console.error("Error fetching favourite restaurant:", error);
   }
@@ -105,6 +113,31 @@ const addFavourite = async (token: string, restaurantId: string) => {
     await addFavouriteToDom(token);
   } catch (error) {
     console.error("Error adding favourite restaurant:", error);
+  }
+};
+
+// function to remove a favourite restaurant
+
+const removeFavourite = async (token: string, restaurantId: string) => {
+  try {
+    const updatedOptions: RequestInit = {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + token,
+      },
+      body: JSON.stringify({ favouriteRestaurant: restaurantId }),
+    };
+
+    const result = await fetchData<{ message: string }>(
+      apiUrl + "/users",
+      updatedOptions
+    );
+    console.log("Removed from favourites: ", result);
+
+    await addFavouriteToDom(token);
+  } catch (error) {
+    console.error("Error removing favourite restaurant:", error);
   }
 };
 
@@ -133,12 +166,12 @@ const handleAddFavourite = async (restaurant: Restaurant) => {
   const modalContent = document.querySelector(
     "#favourite-success-modal-content"
   ) as HTMLParagraphElement;
-  modalContent.textContent = `Restaurant ${restaurant.name} added as favourite!`;
+  modalContent.textContent = `Restaurant ${restaurant.name} added to favourites!`;
   modal.appendChild(modalContent);
   modal.showModal();
   setTimeout(() => {
     modal.close();
-  }, 2000);
+  }, 1200);
 };
 
 export { handleAddFavourite, addFavouriteToDom };

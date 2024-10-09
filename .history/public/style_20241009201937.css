@@ -277,8 +277,9 @@ h4 {
   font-size: 1.3em;
 }
 
-#your-favourite {
+#favourite-list {
   padding: 1em;
+  list-style-type: none;
 }
 
 /* Main page - navigation */

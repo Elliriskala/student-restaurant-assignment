@@ -138,7 +138,7 @@ const handleAddFavourite = async (restaurant: Restaurant) => {
   modal.showModal();
   setTimeout(() => {
     modal.close();
-  }, 2000);
+  }, 1500);
 };
 
 export { handleAddFavourite, addFavouriteToDom };

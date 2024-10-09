@@ -260,7 +260,7 @@ h4 {
   border-radius: 0.5em;
 }
 
-#favourites-section {
+#favorites-section {
   padding: 0.5em  0  0.5em 0;
   margin: auto;
   margin-top: 2em;
@@ -271,14 +271,15 @@ h4 {
   font-size: 0.9em;
 }
 
-#favourites-section h3 {
+#favorites-section h3 {
   margin: 0.5em;
   font-family: 'roboto bold';
   font-size: 1.3em;
 }
 
-#your-favourite {
-  padding: 1em;
+#favorite-list {
+  padding: 0;
+  list-style-type: none;
 }
 
 /* Main page - navigation */
@@ -463,13 +464,13 @@ nav {
   color: var(--cotton-candy);
 }
 
-.favourite-restaurant {
+.favorite-restaurant {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.favourite-button {
+.favorite-button {
   width: 9em;
   background-color: var(--purple-grey);
   color: var(--cotton-candy);
@@ -482,7 +483,7 @@ nav {
   font-size: 0.9em;
 }
 
-.favourite-button:hover {
+.favorite-button:hover {
   background-color: var(--blue-grey);
 }
 

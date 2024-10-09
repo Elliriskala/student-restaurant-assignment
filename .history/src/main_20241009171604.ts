@@ -2,7 +2,7 @@ import { initializeMap } from "./map";
 import { LoginUser, User } from "./interfaces/User";
 import { apiUrl } from "./variables";
 import { fetchData } from "./functions";
-import { addFavouriteToDom } from "./favorites";
+import { addFavoriteToDom } from "./favorites";
 
 const newError = (message: string): void => {
   alert(message);
@@ -108,11 +108,6 @@ const handleRegister = async (evt: Event): Promise<void> => {
   
     const result = await fetchData<User>(apiUrl + "/users", options);
     console.log(result);
-
-    const registerForm = document.querySelector("#register-form") as HTMLFormElement | null;
-      if (registerForm) {
-        registerForm.reset();
-      }
     
     if (result) {
       closeLoginDialog();
@@ -132,7 +127,6 @@ const handleRegister = async (evt: Event): Promise<void> => {
         await checkToken(); 
       }
     }
-
   } catch (error) {
     newError((error as Error).message);
   }
@@ -198,13 +192,13 @@ const loginEventListeners = (): void => {
 const checkToken = async (): Promise<void> => {
   const token = localStorage.getItem('token');
   if (!token) {
-    console.log('No token found. Please login.');
+    console.log('No token found');
     return;
   }
 
   const user = await getUserData(token);
   addUserDataToDom(user);
-  addFavouriteToDom(token);
+  addFavoriteToDom(token);
 };
 
 // display user info in the userpage
@@ -254,10 +248,6 @@ const loggingOut = () => {
 
       const usernameTarget = document.querySelector("#your-username") as HTMLSpanElement | null;
       const emailTarget = document.querySelector("#your-email") as HTMLSpanElement | null;
-
-      const favouriteRestaurant = document.querySelector(
-        "#your-favourite"
-      ) as HTMLParagraphElement;
       
       if (!emailTarget || !usernameTarget) {
         return;
@@ -265,7 +255,6 @@ const loggingOut = () => {
 
       emailTarget.innerText = '';
       usernameTarget.innerText = '';
-      favouriteRestaurant.innerText = '';
 
       const loginForm = document.querySelector(".login-form") as HTMLFormElement;
       if (loginForm) {

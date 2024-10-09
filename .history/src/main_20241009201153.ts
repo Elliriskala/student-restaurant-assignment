@@ -108,11 +108,6 @@ const handleRegister = async (evt: Event): Promise<void> => {
   
     const result = await fetchData<User>(apiUrl + "/users", options);
     console.log(result);
-
-    const registerForm = document.querySelector("#register-form") as HTMLFormElement | null;
-      if (registerForm) {
-        registerForm.reset();
-      }
     
     if (result) {
       closeLoginDialog();
@@ -132,7 +127,6 @@ const handleRegister = async (evt: Event): Promise<void> => {
         await checkToken(); 
       }
     }
-
   } catch (error) {
     newError((error as Error).message);
   }
@@ -254,10 +248,6 @@ const loggingOut = () => {
 
       const usernameTarget = document.querySelector("#your-username") as HTMLSpanElement | null;
       const emailTarget = document.querySelector("#your-email") as HTMLSpanElement | null;
-
-      const favouriteRestaurant = document.querySelector(
-        "#your-favourite"
-      ) as HTMLParagraphElement;
       
       if (!emailTarget || !usernameTarget) {
         return;
@@ -265,7 +255,6 @@ const loggingOut = () => {
 
       emailTarget.innerText = '';
       usernameTarget.innerText = '';
-      favouriteRestaurant.innerText = '';
 
       const loginForm = document.querySelector(".login-form") as HTMLFormElement;
       if (loginForm) {

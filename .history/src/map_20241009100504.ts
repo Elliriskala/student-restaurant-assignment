@@ -3,7 +3,7 @@ import mapboxgl from "mapbox-gl/dist/mapbox-gl.js";
 import { apiUrl } from "./variables";
 import { fetchData } from "./functions";
 import { todayModal, weekModal, errorModal } from "./components";
-import { handleAddFavourite } from "./favorites";
+import { addFavorite } from "./favorites";
 import { Day, WeeklyMenu } from "./types/Menu";
 
 mapboxgl.accessToken =
@@ -147,6 +147,30 @@ const filterRestaurants = (
   });
 };
 
+const restaurantSelection = async (restaurantId: string): Promise<void> => {
+  const token = localStorage.getItem("token");
+
+  if (!token) {
+    const modal = document.querySelector("#please-login-modal") as HTMLDialogElement;
+    modal.showModal();
+    setTimeout(() => {
+      modal.close();
+    }, 1500);
+    return;
+  }
+
+  try {
+    const restaurant = await fetchData<Restaurant>(apiUrl + `/restaurants/${restaurantId}`);
+    console.log("Restaurant selected:", restaurant);
+
+    addFavorite(token, restaurantId);
+
+  } catch (error) {
+    alert("Failed to add restaurant to favorites.");
+    console.error("Failed to add restaurant to favorites:", error);
+  }
+};
+
 const initializePopup = (restaurant: Restaurant, marker: mapboxgl.Marker) => {
   const popUpPlaceholder = document.createElement("div") as HTMLDivElement;
   popUpPlaceholder.classList.add("popup");
@@ -194,33 +218,27 @@ const initializePopup = (restaurant: Restaurant, marker: mapboxgl.Marker) => {
     showWeekmenu([restaurant]);
   });
 
-  const favouriteDiv = document.createElement("div") as HTMLDivElement;
-  favouriteDiv.classList.add("favourite-restaurant");
+  const favoriteDiv = document.createElement("div") as HTMLDivElement;
+  favoriteDiv.classList.add("favorite-restaurant");
 
-  const favouriteButton = document.createElement("button") as HTMLButtonElement;
+  const favoriteButton = document.createElement("button") as HTMLButtonElement;
 
-  favouriteButton.innerText = "Add as favourite";
+  favoriteButton.innerText = "Add to favorites";
 
-  favouriteButton.addEventListener("click", async () => { 
-    try {
-      await handleAddFavourite(restaurant);
-      console.log(restaurant);
-
-    } catch (error) {
-      console.error("Error adding favourite:", error);
-    }
+  favoriteButton.addEventListener("click", async () => { 
+    await restaurantSelection(restaurant._id)
   });
   
   todayButton.classList.add("popup-button");
   weekButton.classList.add("popup-button");
-  favouriteButton.classList.add("favourite-button");
+  favoriteButton.classList.add("favorite-button");
 
   todayButtonLI.appendChild(todayButton);
   weekButtonLI.appendChild(weekButton);
   buttonUL.appendChild(todayButtonLI).after(weekButtonLI);
-  favouriteDiv.appendChild(favouriteButton);
+  favoriteDiv.appendChild(favoriteButton);
   popUpbuttons.appendChild(buttonUL);
-  popUpbuttons.appendChild(favouriteDiv);
+  popUpbuttons.appendChild(favoriteDiv);
   popUpPlaceholder.appendChild(popUpbuttons);
 
   const popUp = new mapboxgl.Popup().setDOMContent(popUpPlaceholder);

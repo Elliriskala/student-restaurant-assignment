@@ -133,12 +133,12 @@ const handleAddFavourite = async (restaurant: Restaurant) => {
   const modalContent = document.querySelector(
     "#favourite-success-modal-content"
   ) as HTMLParagraphElement;
-  modalContent.textContent = `Restaurant ${restaurant.name} added as favourite!`;
+  modalContent.textContent = `Restaurant ${restaurant.name} added to favourites!`;
   modal.appendChild(modalContent);
   modal.showModal();
   setTimeout(() => {
     modal.close();
-  }, 2000);
+  }, 1200);
 };
 
 export { handleAddFavourite, addFavouriteToDom };

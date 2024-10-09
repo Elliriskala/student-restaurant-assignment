@@ -87,6 +87,7 @@ const handleRegister = async (evt: Event): Promise<void> => {
     "#password-register"
   ) as HTMLInputElement | null;
   const registerEmailInput = document.querySelector("#email-register") as HTMLInputElement | null;
+  const registerForm = document.querySelector("#register-form") as HTMLFormElement | null;
   
   if (!registerUsernameInput || !registerEmailInput ||!registerPasswordInput) {
     newError("Element not found");
@@ -108,11 +109,6 @@ const handleRegister = async (evt: Event): Promise<void> => {
   
     const result = await fetchData<User>(apiUrl + "/users", options);
     console.log(result);
-
-    const registerForm = document.querySelector("#register-form") as HTMLFormElement | null;
-      if (registerForm) {
-        registerForm.reset();
-      }
     
     if (result) {
       closeLoginDialog();
@@ -133,6 +129,9 @@ const handleRegister = async (evt: Event): Promise<void> => {
       }
     }
 
+    if (registerForm)
+      registerForm.reset();
+    
   } catch (error) {
     newError((error as Error).message);
   }

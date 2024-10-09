@@ -108,11 +108,6 @@ const handleRegister = async (evt: Event): Promise<void> => {
   
     const result = await fetchData<User>(apiUrl + "/users", options);
     console.log(result);
-
-    const registerForm = document.querySelector("#register-form") as HTMLFormElement | null;
-      if (registerForm) {
-        registerForm.reset();
-      }
     
     if (result) {
       closeLoginDialog();
@@ -189,6 +184,7 @@ const loginEventListeners = (): void => {
 
   if (registerForm) {
     registerForm.addEventListener("submit", handleRegister);
+    registerForm.reset();
   }
 };
 
